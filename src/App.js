@@ -3,6 +3,7 @@ import Navbar from './Navbar';
 import Notes from './Notes';
 import NotePageNav from './NotePageNav'
 import NotePageMain from './NotePageMain'
+import './App.css'
 import { Route, Link } from 'react-router-dom';
 import {getNotesForFolder, findNote, findFolder} from './NoteHelper';
 
@@ -88,7 +89,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <nav className="navbar">{this.renderNavRoutes()}</nav>
-        <header>
+        <header className="header">
           <Link to="/"><h1>Noteful</h1></Link>{' '}
         </header>
         <main>

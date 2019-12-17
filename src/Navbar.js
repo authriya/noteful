@@ -2,6 +2,7 @@ import React from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import { countNotesForFolder } from './NoteHelper'
 import CircleButton from './CircleButton'
+import './Navbar.css'
 
 class Navbar extends React.Component {
     render() {

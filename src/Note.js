@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import './Note.css'
 
 class Note extends React.Component{
     render() {

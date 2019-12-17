@@ -1,5 +1,6 @@
 import React from 'react'
 import CircleButton from './CircleButton'
+import './NotePageNav.css'
 
 export default function NotePageNav(props) {
     return (
