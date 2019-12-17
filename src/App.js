@@ -20,7 +20,7 @@ class App extends React.Component {
     const {notes, folders} = this.state;
     return(
       <>
-        {['/', 'folder/:folderId'].map(path => (
+        {['/', '/folder/:folderId'].map(path => (
           <Route
             exact
             key = {path}
