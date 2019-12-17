@@ -13,10 +13,10 @@ class Navbar extends React.Component {
               className='NoteListNav__folder-link'
               to={`/folder/${folder.id}`}
             >
+              {folder.name} {' '}
               <span className='NoteListNav__num-notes'>
-                {countNotesForFolder(this.props.notes, folder.id)}
+                ({countNotesForFolder(this.props.notes, folder.id)})
               </span>
-              {folder.name}
             </NavLink>
           </li>
         )}

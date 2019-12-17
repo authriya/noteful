@@ -11,13 +11,13 @@ class Note extends React.Component{
         </Link>
       </h2>
       <button className='Note__delete' type='button'>
-        remove
+        remove 
       </button>
       <div className='Note__dates'>
         <div className='Note__dates-modified'>
-          Modified
+          Modified {' '}
           <span className='Date'>
-            {this.props.modified, 'Do MMM YYYY'}
+          {this.props.modified}
           </span>
         </div>
       </div>

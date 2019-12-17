@@ -13,7 +13,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    setTimeout(() => this.setState(this.props.STORE), 600)
+    setTimeout(() => this.setState(this.props.store), 600)
   }
 
   renderNavRoutes() {
@@ -87,12 +87,12 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <nav className="navbar">{this.renderNavRoutes}</nav>
+        <nav className="navbar">{this.renderNavRoutes()}</nav>
         <header>
           <Link to="/"><h1>Noteful</h1></Link>{' '}
         </header>
         <main>
-          {this.renderMainRoutes}
+          {this.renderMainRoutes()}
         </main>
       </div>
       );
