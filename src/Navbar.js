@@ -1,6 +1,7 @@
 import React from 'react'
-import { NavLink} from 'react-router-dom'
+import { NavLink, Link } from 'react-router-dom'
 import { countNotesForFolder } from './NoteHelper'
+import CircleButton from './CircleButton'
 
 class Navbar extends React.Component {
     render() {
@@ -14,13 +15,24 @@ class Navbar extends React.Component {
               to={`/folder/${folder.id}`}
             >
               {folder.name} {' '}
-              <span className='NoteListNav__num-notes'>
+              <span className='Nav__num-notes'>
                 ({countNotesForFolder(this.props.notes, folder.id)})
               </span>
             </NavLink>
           </li>
         )}
       </ul>
+      <div className='Nav__button-wrapper'>
+        <CircleButton
+          tag={Link}
+          to='/add-folder'
+          type='button'
+          className='NoteListNav__add-folder-button'
+        >
+          <br />
+          Add Folder
+        </CircleButton>
+      </div>
     </div>
   )
 }}

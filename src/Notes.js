@@ -1,5 +1,7 @@
 import React from 'react'
 import Note from './Note'
+import CircleButton from './CircleButton'
+import {Link} from 'react-router-dom'
 
 class Notes extends React.Component{
     render() {
@@ -16,6 +18,18 @@ class Notes extends React.Component{
                         </li>
                     )}
                 </ul>
+                <div className='NoteListMain__button-container'>
+        <CircleButton
+          tag={Link}
+          to='/add-note'
+          type='button'
+          className='NoteListMain__add-note-button'
+        >
+          <br />
+          Add Note
+          <br />
+        </CircleButton>
+      </div>
             </section>
         )
     }

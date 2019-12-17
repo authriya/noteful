@@ -17,3 +17,9 @@ export default function NotePageMain(props) {
       </section>
     )
   }
+
+  NotePageMain.defaultProps = {
+    note: {
+      content: '',
+    }
+  }
