@@ -5,7 +5,7 @@ import NotePageNav from './NotePageNav'
 import NotePageMain from './NotePageMain'
 import './App.css'
 import { Route, Link } from 'react-router-dom';
-import {getNotesForFolder, findNote, findFolder} from './NoteHelper';
+import ApiContext from './ApiContext'
 
 class App extends React.Component {
   state = {
@@ -14,11 +14,32 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    setTimeout(() => this.setState(this.props.store), 600)
+    Promise.all([
+      fetch(`http://localhost:9090/notes`),
+      fetch(`http://localhost:9090/folders`)
+    ])
+      .then(([notesRes, foldersRes]) => {
+        if(!notesRes.ok)
+        return notesRes.json().then(e=>Promise.reject(e));
+        if(!foldersRes.ok)
+        return foldersRes.json().then(e=>Promise.reject(e));
+        return Promise.all([notesRes.json(), foldersRes.json()]);
+      })
+      .then(([notes, folders]) => {
+        this.setState({notes, folders});
+      })
+      .catch(error=> {
+        console.error({error});
+      })
+  }
+
+  handleDeleteNote = (noteId) => {
+    this.setState({
+      notes: this.state.notes.filter(note=> note.id !== noteId)
+    })
   }
 
   renderNavRoutes() {
-    const {notes, folders} = this.state;
     return(
       <>
         {['/', '/folder/:folderId'].map(path => (
@@ -26,23 +47,12 @@ class App extends React.Component {
             exact
             key = {path}
             path = {path}
-            render = {routeProps => (
-              <Navbar
-                folders = {folders}
-                notes = {notes}
-                {...routeProps}
-              />
-            )}
+            component = {Navbar}
           />
         ))}
         <Route
             path = "/note/:noteId"
-            render = {routeProps => {
-              const {noteId} = routeProps.match.params;
-              const note = findNote(notes, noteId) || {};
-              const folder = findFolder(folders, note.folderId);
-              return <NotePageNav {...routeProps} folder={folder}/>
-            }}
+            component = {NotePageNav}
         />
         <Route path= "/add-folder" component={NotePageNav}/>
         <Route path="/add-note" component={NotePageNav} />
@@ -51,7 +61,6 @@ class App extends React.Component {
   }
 
   renderMainRoutes() {
-    const {notes, folders} = this.state;
     return(
       <>
         {['/','/folder/:folderId'].map(path => (
@@ -59,43 +68,34 @@ class App extends React.Component {
             exact
             key = {path}
             path = {path}
-            render = {routeProps => {
-              const {folderId} = routeProps.match.params;
-              const notesForFolder = getNotesForFolder(
-                notes,
-                folderId
-              );
-              return(
-                <Notes
-                  {...routeProps}
-                  notes = {notesForFolder}
-                />
-              )
-            }}
+            component = {Notes}
           />
         ))}
         <Route 
           path="/note/:noteId"
-          render={routeProps => {
-            const {noteId} =routeProps.match.params;
-            const note = findNote(notes, noteId);
-            return <NotePageMain {...routeProps} note={note}/>
-          }}
+          component={NotePageMain}
         />
       </>
     )
   }
   render() {
+    const value = {
+      notes: this.state.notes,
+      folders: this.state.folders,
+      deleteNote: this.handleDeleteNote
+    }
     return (
-      <div className="App">
-        <nav className="navbar">{this.renderNavRoutes()}</nav>
-        <header className="header">
-          <Link to="/"><h1>Noteful</h1></Link>{' '}
-        </header>
-        <main>
-          {this.renderMainRoutes()}
-        </main>
-      </div>
+      <ApiContext.Provider value = {value}>
+        <div className="App">
+          <nav className="navbar">{this.renderNavRoutes()}</nav>
+          <header className="header">
+            <Link to="/"><h1>Noteful</h1></Link>{' '}
+          </header>
+          <main>
+            {this.renderMainRoutes()}
+          </main>
+        </div>
+      </ApiContext.Provider>
       );
   }
 }

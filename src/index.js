@@ -122,6 +122,6 @@ const STORE = {
 }
 ReactDOM.render(
 <BrowserRouter>
-    <App store={STORE}/>
+    <App/>
 </BrowserRouter>
 , document.getElementById('root'));
