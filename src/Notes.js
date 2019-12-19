@@ -49,7 +49,7 @@ class Notes extends React.Component{
 }
 
 Notes.propTypes = {
-    match: PropTypes.objectOf(PropTypes.object).isRequired
+    match: PropTypes.objectOf(PropTypes.string).isRequired
 }
 
 export default Notes

@@ -41,7 +41,6 @@ export default class AddNote extends React.Component {
 
     updateFolderId = (folder) => {
         this.setState({folderId: {value: folder, touched: true}});
-        console.log(this.state.folderId.value)
     }
 
     handleSubmit(event) {
@@ -86,7 +85,8 @@ export default class AddNote extends React.Component {
 
     validateFolderId() {
         const folderOption = this.state.folderId.value;
-        if(folderOption === null) {
+        console.log(this.state.folderId.value)
+        if(folderOption === "") {
             return 'Picking a folder is required'
         }
     }
@@ -123,15 +123,15 @@ export default class AddNote extends React.Component {
                     onChange = {e=> this.updateName(e.target.value, modified)}/>
                     {this.state.name.touched && (<ValidationError message = {nameError}/>)}
                     <label htmlFor="folder">Pick a folder *</label>
-                    <select className ="folder_select" onChange= {e=> this.updateFolderId(e.target.value)}>
-                        <option disabled selected value> -- select an option -- </option>
+                    <select className ="folder_select" onChange= {e=> this.updateFolderId(e.target.value)} required>
+                        <option defaultValue = ""></option>
                         {this.context.folders.map(folder =>
-                            <option key={folder.id} value={folder.id} className="folder_option">
+                            <option key={folder.id} defaultValue={folder.id} className="folder_option">
                                 {folder.name}
                             </option>
                             )}
                     </select>
-                    {this.state.folderId.touched && (<ValidationError message = {folderIdError}/>)}
+                    {(this.state.folderId.touched || this.state.content.touched) && (<ValidationError message = {folderIdError}/>)}
                     <label htmlFor="content">Content</label>
                     <input type="text" className="note_content" name="content" id="content"
                     onChange = {e => this.updateContent(e.target.value, modified)}/>

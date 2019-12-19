@@ -17,5 +17,5 @@ export default function CircleButton(props) {
 
 CircleButton.propTypes = {
   className: PropTypes.string.isRequired,
-  children: PropTypes.string.isRequired
+  children: PropTypes.array.isRequired
 }
