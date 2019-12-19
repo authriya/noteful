@@ -85,7 +85,6 @@ export default class AddNote extends React.Component {
 
     validateFolderId() {
         const folderOption = this.state.folderId.value;
-        console.log(this.state.folderId.value)
         if(folderOption === "") {
             return 'Picking a folder is required'
         }
