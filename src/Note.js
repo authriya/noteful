@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import './Note.css'
 import ApiContext from './ApiContext'
+import PropTypes from 'prop-types'
 
 class Note extends React.Component{
   static defaultProps ={
@@ -48,13 +49,20 @@ class Note extends React.Component{
             <div className='Note__dates-modified'>
               Modified {' '}
               <span className='Date'>
-              {modified}
+              {modified.slice(0, 10)}
               </span>
             </div>
           </div>
         </div>
         )
     }
+}
+
+Note.propTypes = {
+  onDeleteNote: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  modified: PropTypes.string.isRequired
 }
 
 export default Note

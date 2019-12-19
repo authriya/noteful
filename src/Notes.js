@@ -5,6 +5,7 @@ import './Notes.css'
 import {Link} from 'react-router-dom'
 import ApiContext from './ApiContext'
 import {getNotesForFolder} from './NoteHelper'
+import PropTypes from 'prop-types'
 
 class Notes extends React.Component{
     static defaultProps = {
@@ -45,6 +46,10 @@ class Notes extends React.Component{
             </section>
         )
     }
+}
+
+Notes.propTypes = {
+    match: PropTypes.objectOf(PropTypes.object).isRequired
 }
 
 export default Notes
