@@ -49,7 +49,7 @@ class Note extends React.Component{
             <div className='Note__dates-modified'>
               Modified {' '}
               <span className='Date'>
-              {modified.slice(0, 10)}
+              {modified ? modified.slice(0, 10) : modified}
               </span>
             </div>
           </div>
