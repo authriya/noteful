@@ -123,9 +123,9 @@ export default class AddNote extends React.Component {
                     {this.state.name.touched && (<ValidationError message = {nameError}/>)}
                     <label htmlFor="folder">Pick a folder *</label>
                     <select className ="folder_select" onChange= {e=> this.updateFolderId(e.target.value)} required>
-                        <option defaultValue = ""></option>
+                        <option value = ""></option>
                         {this.context.folders.map(folder =>
-                            <option key={folder.id} defaultValue={folder.id} className="folder_option">
+                            <option key={folder.id} value={folder.id} className="folder_option">
                                 {folder.name}
                             </option>
                             )}
