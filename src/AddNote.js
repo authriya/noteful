@@ -49,10 +49,10 @@ export default class AddNote extends React.Component {
             name: this.state.name.value,
             modified: this.state.modified, 
             content: this.state.content.value,
-            folderId: this.state.folderId.value
+            folderid: this.state.folderId.value
         }
         console.log(note);
-        const url = `http://localhost:9090/notes`
+        const url = `http://localhost:8000/api/notes`
         console.log(url)
         fetch(url, {
             method: 'POST',

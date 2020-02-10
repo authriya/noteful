@@ -16,9 +16,13 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    this.updateState()
+  }
+
+  updateState = () => {
     Promise.all([
-      fetch(`http://localhost:9090/notes`),
-      fetch(`http://localhost:9090/folders`)
+      fetch(`http://localhost:8000/api/notes`),
+      fetch(`http://localhost:8000/api/folders`)
     ])
       .then(([notesRes, foldersRes]) => {
         if(!notesRes.ok)
@@ -37,8 +41,9 @@ class App extends React.Component {
 
   handleDeleteNote = (noteId) => {
     this.setState({
-      notes: this.state.notes.filter(note=> note.id !== noteId)
+      notes: this.state.notes.filter(note=> note.id != noteId)
     })
+    console.log(this.state.notes)
   }
 
   addNote = (note) => {
@@ -106,7 +111,8 @@ class App extends React.Component {
       folders: this.state.folders,
       deleteNote: this.handleDeleteNote,
       addNote: this.addNote,
-      addFolder: this.addFolder
+      addFolder: this.addFolder,
+      updateState: this.updateState
     }
     return (
       <ApiContext.Provider value = {value}>
