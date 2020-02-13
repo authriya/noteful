@@ -13,7 +13,7 @@ class Note extends React.Component{
   handleClickDelete = e => {
     e.preventDefault()
     const noteId= this.props.id
-    fetch(`http://localhost:8000/api/notes/${noteId}`, {
+    fetch(` https://quiet-waters-80091.herokuapp.com/api/notes/${noteId}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'

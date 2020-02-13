@@ -21,8 +21,8 @@ class App extends React.Component {
 
   updateState = () => {
     Promise.all([
-      fetch(`http://localhost:8000/api/notes`),
-      fetch(`http://localhost:8000/api/folders`)
+      fetch(` https://quiet-waters-80091.herokuapp.com/api/notes`),
+      fetch(` https://quiet-waters-80091.herokuapp.com/api/folders`)
     ])
       .then(([notesRes, foldersRes]) => {
         if(!notesRes.ok)

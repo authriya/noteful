@@ -52,7 +52,7 @@ export default class AddNote extends React.Component {
             folderid: this.state.folderId.value
         }
         console.log(note);
-        const url = `http://localhost:8000/api/notes`
+        const url = ` https://quiet-waters-80091.herokuapp.com/api/notes`
         console.log(url)
         fetch(url, {
             method: 'POST',

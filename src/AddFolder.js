@@ -24,7 +24,7 @@ export default class AddFolder extends React.Component{
         const folder = {
             name: this.state.name.value
         }
-        const url = `http://localhost:8000/api/folders`
+        const url = ` https://quiet-waters-80091.herokuapp.com/api/folders`
         fetch(url, {
             method: 'POST',
             headers: {
